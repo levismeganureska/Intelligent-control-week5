@@ -1,0 +1,28 @@
+Levis Mega Nureska (224308010)
+Analisis dan diskusi week 5 
+
+-ANALISI-
+Akurasi Deteksi Pose dengan YOLOv8
+YOLOv8 Pose cukup akurat dalam mendeteksi pose manusia, terutama dalam kondisi pencahayaan yang baik. Keakuratan tergantung pada faktor berikut:
+
+Versi model YOLOv8 yang digunakan: Model yolov8n-pose.pt lebih ringan dan lebih cepat, tetapi kurang akurat dibandingkan yolov8m-pose.pt atau yolov8x-pose.pt.
+Resolusi input: Gambar dengan resolusi lebih tinggi cenderung memberikan hasil lebih akurat.
+Sudut kamera dan postur objek: Model ini bisa kesulitan dengan pose yang tidak umum atau objek yang hanya terlihat sebagian.
+
+Performa di Kondisi Pencahayaan Rendah
+YOLOv8 menggunakan CNN (Convolutional Neural Network) yang sensitif terhadap kontras dan pencahayaan.
+Di kondisi cahaya redup, YOLOv8 masih bisa bekerja tetapi bisa mengalami:
+Kesalahan deteksi atau kehilangan beberapa titik pose.
+Prediksi kurang stabil karena noise lebih dominan.
+Penurunan akurasi jika bagian tubuh tidak terlihat jelas.
+
+Bagaimana YOLOv8 dibandingkan dengan metode HPE lain seperti MediaPipe atau 
+OpenPose?  
+YOLOv8 Pose menawarkan keseimbangan antara kecepatan dan akurasi dalam deteksi pose manusia, menjadikannya pilihan yang baik untuk aplikasi real-time. Dibandingkan dengan **MediaPipe Pose**, YOLOv8 lebih fleksibel dalam mendeteksi banyak orang dalam satu frame, sedangkan MediaPipe lebih dioptimalkan untuk satu individu dengan efisiensi tinggi, terutama pada perangkat mobile. Dari segi kecepatan, MediaPipe lebih unggul karena dapat berjalan hingga **50 FPS**, sementara YOLOv8 tetap real-time dengan **>30 FPS** pada GPU yang cukup baik. Jika dibandingkan dengan **OpenPose**, YOLOv8 lebih ringan dan lebih cepat, tetapi OpenPose memiliki keakuratan yang lebih tinggi dalam mendeteksi titik-titik tubuh dengan detail lebih baik, terutama dalam kondisi pencahayaan atau pose yang kompleks. Namun, OpenPose jauh lebih berat secara komputasi, dengan kecepatan hanya **5-10 FPS** bahkan pada perangkat yang kuat. Secara keseluruhan, jika prioritas utama adalah **kecepatan dan efisiensi real-time**, maka YOLOv8 lebih unggul dibandingkan OpenPose, tetapi jika akurasi menjadi faktor utama, OpenPose atau model berbasis HRNet adalah pilihan yang lebih baik.
+
+-DISKUSI-
+YOLOv8 Pose dapat diterapkan dalam robotika dan otomatisasi industri untuk berbagai tugas, seperti pemantauan keselamatan pekerja, interaksi manusia-robot, dan kontrol gestur. Dalam industri manufaktur, deteksi pose dapat digunakan untuk memastikan pekerja mengikuti prosedur keselamatan atau untuk mengontrol robot dengan gerakan tangan. Selain itu, pada robot layanan, YOLOv8 Pose dapat membantu dalam navigasi berbasis interaksi manusia atau pengoperasian peralatan dengan kontrol berbasis gestur.
+
+Namun, terdapat beberapa tantangan dalam mendeteksi pose manusia secara real-time, seperti kondisi pencahayaan yang buruk, kecepatan pemrosesan yang tinggi, dan variasi postur tubuh yang kompleks. Model harus mampu menangani occlusion (bagian tubuh tertutup), perubahan sudut kamera, serta berbagai bentuk dan ukuran tubuh manusia. Selain itu, keterbatasan perangkat keras juga dapat mempengaruhi performa, terutama pada sistem yang tidak menggunakan GPU.
+
+Untuk meningkatkan akurasi deteksi pose, penggunaan dataset tambahan sangat penting. Dataset yang lebih besar dan lebih beragam, seperti COCO Keypoints, MPII Human Pose, atau dataset kustom yang relevan, dapat membantu model mengenali lebih banyak variasi pose. Selain itu, teknik seperti data augmentation (rotasi, perubahan pencahayaan, flipping), fine-tuning model dengan transfer learning, serta peningkatan resolusi input gambar dapat secara signifikan meningkatkan performa deteksi pose dalam berbagai kondisi nyata.
